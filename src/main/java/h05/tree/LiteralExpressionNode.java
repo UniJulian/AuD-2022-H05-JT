@@ -32,7 +32,6 @@ public class LiteralExpressionNode extends OperandExpressionNode {
      * value.
      *
      * @param value the literal operand
-     *
      * @throws NullPointerException if the value is {@code null}
      */
     public LiteralExpressionNode(MyNumber value) {

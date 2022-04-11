@@ -31,7 +31,6 @@ public class IdentifierExpressionNode extends OperandExpressionNode {
      * Constructs and initializes an identifier expression node with the given value.
      *
      * @param value the identifier name
-     *
      * @throws IllegalArgumentException    if the identifier name is not valid
      * @throws IllegalIdentifierExceptions if the identifier name is not valid
      * @throws NullPointerException        if the identifier name is {@code null}

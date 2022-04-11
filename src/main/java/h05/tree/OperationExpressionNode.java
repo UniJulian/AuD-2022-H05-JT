@@ -48,7 +48,6 @@ public class OperationExpressionNode implements ArithmeticExpressionNode {
      *
      * @param operator the operator of this node
      * @param operands the operands of this node
-     *
      * @throws NullPointerException if the operator is {@code null}
      */
     public OperationExpressionNode(Operator operator, @Nullable ListItem<ArithmeticExpressionNode> operands) {

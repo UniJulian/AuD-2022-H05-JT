@@ -43,7 +43,6 @@ public final class MyReal extends MyNumber {
      * Constructs and initializes a real number with the specified value.
      *
      * @param value the value of the real number
-     *
      * @throws NullPointerException if the value is null
      */
     public MyReal(BigDecimal value) {

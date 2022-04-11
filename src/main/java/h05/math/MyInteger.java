@@ -32,7 +32,6 @@ public final class MyInteger extends MyNumber {
      * Constructs and initializes an integer with the specified value.
      *
      * @param value the value of the real number
-     *
      * @throws NullPointerException if the value is null
      */
     public MyInteger(BigInteger value) {

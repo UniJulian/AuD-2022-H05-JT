@@ -49,7 +49,6 @@ public abstract class MyNumber {
      * representation of this number.
      *
      * @return hash code for this {@code MyNumber}.
-     *
      * @see #equals(Object)
      */
     @Override
@@ -61,10 +60,8 @@ public abstract class MyNumber {
      * Therefore, 0.5 is not equal to 1/2 when compared by this.
      *
      * @param obj {@code Object} to which this {@code MyNumber} is to be compared.
-     *
      * @return {@code true} if and only if the specified {@code Object} is a {@code MyNumber} whose
      * value representation and class are equal to this {@code MyNumber}'s.
-     *
      * @see #hashCode
      */
     @Override
@@ -106,7 +103,6 @@ public abstract class MyNumber {
      * <p>Notice if the result can be represented as an integer, it will be an integer.
      *
      * @param other the number to add
-     *
      * @return the sum of this number and the given number
      */
     public abstract MyNumber plus(MyNumber other);
@@ -130,7 +126,6 @@ public abstract class MyNumber {
      * <p>Notice if the result can be represented as an integer, it will be an integer.
      *
      * @param other the number to subtract
-     *
      * @return the difference of this number and the given number
      */
     public abstract MyNumber minus(MyNumber other);
@@ -156,7 +151,6 @@ public abstract class MyNumber {
      * <p>Notice if the result can be represented as an integer, it will be an integer.
      *
      * @param other the number to multiply
-     *
      * @return the product of this number and the given number
      */
     public abstract MyNumber times(MyNumber other);
@@ -171,7 +165,6 @@ public abstract class MyNumber {
      * </ol>
      *
      * @return the quotient of this number and the neutral element 1
-     *
      * @throws WrongOperandException if the number is 0
      */
     public abstract MyNumber divide();
@@ -188,9 +181,7 @@ public abstract class MyNumber {
      * <p>Notice if the result can be represented as an integer, it will be an integer.
      *
      * @param other the number to divide
-     *
      * @return the quotient of this number and the given number
-     *
      * @throws WrongOperandException if the given number is 0
      */
     public abstract MyNumber divide(MyNumber other);
@@ -207,7 +198,6 @@ public abstract class MyNumber {
      * real or an integer.
      *
      * @param n the exponent
-     *
      * @return {@code this} number raised to the power of {@code n}
      */
     public abstract MyNumber expt(MyNumber n);
@@ -217,7 +207,6 @@ public abstract class MyNumber {
      * always be real or an integer.
      *
      * @return Euler’s number raised to the power of {@code this}
-     *
      * @throws WrongOperandException if this number is not positive or the large
      */
     public abstract MyNumber exp();
@@ -227,7 +216,6 @@ public abstract class MyNumber {
      * integer.
      *
      * @return the natural logarithm of this number
-     *
      * @throws WrongOperandException if this number is not positive
      */
     public abstract MyNumber ln();
@@ -237,9 +225,7 @@ public abstract class MyNumber {
      * always be real or an integer.
      *
      * @param base the base of the logarithm
-     *
      * @return the logarithm of this number with base {@code base}
-     *
      * @throws WrongOperandException if this number is not positive or the base is not positive
      */
     public abstract MyNumber log(MyNumber base);
@@ -248,7 +234,6 @@ public abstract class MyNumber {
      * Checks if the given real number can be represented as an integer.
      *
      * @param real the real number to check
-     *
      * @return an integer if the real number can be represented as an integer, otherwise the real
      * number
      */
@@ -264,7 +249,6 @@ public abstract class MyNumber {
      * Checks if the given rational number can be represented as an integer.
      *
      * @param rational the real number to check
-     *
      * @return an integer if the rational number can be represented as an integer, otherwise the
      * rational number
      */

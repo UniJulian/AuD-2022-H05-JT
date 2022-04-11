@@ -32,7 +32,6 @@ public final class MyRational extends MyNumber {
      * Constructs and initializes a rational number with the specified value.
      *
      * @param value the value of the rational number
-     *
      * @throws NullPointerException if the value is null
      */
     public MyRational(Rational value) {

@@ -38,7 +38,6 @@ public final class Rational {
      *
      * @param numerator   the numerator of the rational number
      * @param denominator the denominator of the rational number
-     *
      * @throws ArithmeticException if the denominator is zero
      */
     public Rational(BigInteger numerator, BigInteger denominator) {
@@ -82,7 +81,6 @@ public final class Rational {
      * Returns the sum of this rational number and the integer number.
      *
      * @param other the integer number to add
-     *
      * @return the sum of this rational number and the integer number
      */
     public Rational plus(BigInteger other) {
@@ -93,7 +91,6 @@ public final class Rational {
      * Returns the sum of this rational number and the rational number.
      *
      * @param other the rational number to add
-     *
      * @return the sum of this rational number and the rational number
      */
     public Rational plus(Rational other) {
@@ -107,7 +104,6 @@ public final class Rational {
      * Returns the product of this rational number and the integer number.
      *
      * @param other the integer number to multiply
-     *
      * @return the product of this rational number and the integer number
      */
     public Rational times(BigInteger other) {
@@ -118,7 +114,6 @@ public final class Rational {
      * Returns the product of this rational number and the rational number.
      *
      * @param other the rational number to multiply
-     *
      * @return the product of this rational number and the rational number
      */
     public Rational times(Rational other) {

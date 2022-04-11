@@ -24,9 +24,7 @@ public final class ExpressionTreeHandler {
      * Builds an arithmetic expression tree from a string recursively.
      *
      * @param expression the string representation of the arithmetic expression to parse
-     *
      * @return the root node of the arithmetic expression tree
-     *
      * @throws BadOperationException        if the iterator has no more tokens
      * @throws ParenthesesMismatchException if the parentheses are mismatched
      * @throws UndefinedOperatorException   if the operator is not defined
@@ -39,9 +37,7 @@ public final class ExpressionTreeHandler {
      * Builds an arithmetic expression tree from a string iteratively.
      *
      * @param expression the string representation of the arithmetic expression to parse
-     *
      * @return the root node of the arithmetic expression tree
-     *
      * @throws BadOperationException        if the iterator has no more tokens
      * @throws ParenthesesMismatchException if the parentheses are mismatched
      * @throws UndefinedOperatorException   if the operator is not defined
@@ -54,7 +50,6 @@ public final class ExpressionTreeHandler {
      * Reconstructs the string representation of the arithmetic expression tree.
      *
      * @param root the root node of the arithmetic expression tree
-     *
      * @return the string representation of the arithmetic expression tree
      */
     public static List<String> reconstruct(ArithmeticExpressionNode root) {

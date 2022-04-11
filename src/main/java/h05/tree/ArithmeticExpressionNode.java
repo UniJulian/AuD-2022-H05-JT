@@ -23,14 +23,11 @@ public interface ArithmeticExpressionNode extends Cloneable {
      */
     String RIGHT_BRACKET = ")";
 
-
     /**
      * Evaluates the arithmetic expression.
      *
      * @param identifiers a map of identifiers and their values
-     *
      * @return the result of the arithmetic expression
-     *
      * @throws IllegalIdentifierExceptions  if the identifier in the map is illegal to use
      * @throws UndefinedIdentifierException if the identifier is not defined for use in the map
      */

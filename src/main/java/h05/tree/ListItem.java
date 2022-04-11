@@ -21,7 +21,6 @@ import org.jetbrains.annotations.Nullable;
  * }</pre>
  *
  * @param <T> type of key
- *
  * @author Nhan Huynh
  */
 public class ListItem<T> {
@@ -47,4 +46,3 @@ public class ListItem<T> {
         return String.format("[%s|%s]", key, next == null ? "null" : next.key);
     }
 }
-
