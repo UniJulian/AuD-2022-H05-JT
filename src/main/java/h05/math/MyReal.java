@@ -43,6 +43,7 @@ public final class MyReal extends MyNumber {
      * Constructs and initializes a real number with the specified value.
      *
      * @param value the value of the real number
+     *
      * @throws NullPointerException if the value is null
      */
     public MyReal(BigDecimal value) {
@@ -50,20 +51,10 @@ public final class MyReal extends MyNumber {
         this.value = value.setScale(SCALE, ROUNDING_MODE);
     }
 
-    /**
-     * Rounds the number down.
-     *
-     * @return the rounded number
-     */
-    private BigDecimal round() {
-        int sign = value.signum();
-        BigDecimal rounded = value.abs();
-        return sign == -1 ? rounded.negate() : rounded;
-    }
 
     @Override
     public BigInteger toInteger() {
-        return round().toBigInteger();
+        return value.toBigInteger();
     }
 
     @Override
