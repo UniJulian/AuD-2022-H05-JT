@@ -97,7 +97,7 @@ public abstract class MyNumber {
      * <ol>
      *     <li>If both numbers are integers, the result will be an integer</li>
      *     <li>If one of the number is real, the result will be real</li>
-     *     <li>Otherwise (both numbers are rational,) the result will be rational</li>
+     *     <li>Otherwise the result will be rational</li>
      * </ol>
      *
      * <p>Notice if the result can be represented as an integer, it will be an integer.
@@ -120,7 +120,7 @@ public abstract class MyNumber {
      * <ol>
      *     <li>If both numbers are integers, the result will be an integer</li>
      *     <li>If one of the number is real, the result will be real</li>
-     *     <li>Otherwise (both numbers are rational,) the result will be rational</li>
+     *     <li>Otherwise the result will be rational</li>
      * </ol>
      *
      * <p>Notice if the result can be represented as an integer, it will be an integer.
@@ -145,7 +145,7 @@ public abstract class MyNumber {
      * <ol>
      *     <li>If both numbers are integers, the result will be an integer</li>
      *     <li>If one of the number is real, the result will be real</li>
-     *     <li>If both numbers are rational, the result will be rational</li></li>
+     *     <li>Otherwise the result will be rational</li>
      * </ol>
      *
      * <p>Notice if the result can be represented as an integer, it will be an integer.
@@ -160,8 +160,8 @@ public abstract class MyNumber {
      *
      * <ol>
      *     <li>If the number is an integer, the result will be rational</li>
-     *      <li>If the number is an real, the result will be real</li>
-     *     <li>Otherwise (the number rational,) the result will be rational</li>
+     *     <li>If the number is an real, the result will be real</li>
+     *     <li>Otherwise the result will be rational</li>
      * </ol>
      *
      * @return the quotient of this number and the neutral element 1
@@ -175,7 +175,7 @@ public abstract class MyNumber {
      * <ol>
      *     <li>If both numbers are integers, the result will be an rational</li>
      *     <li>If one of the number is real, the result will be real</li>
-     *     <li>Otherwise (both numbers are rational,) the result will be rational</li>
+     *     <li>Otherwise the result will be rational</li>
      * </ol>
      *
      * <p>Notice if the result can be represented as an integer, it will be an integer.
