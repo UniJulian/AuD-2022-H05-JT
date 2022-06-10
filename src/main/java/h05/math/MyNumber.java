@@ -238,10 +238,14 @@ public abstract class MyNumber {
      * number
      */
     protected MyNumber checkRealToInt(BigDecimal real) {
-        BigDecimal stripped = real.stripTrailingZeros();
+        BigDecimal stripped = real
+            .setScale(MyReal.SCALE, MyReal.ROUNDING_MODE)
+            .stripTrailingZeros();
+
         if (stripped.scale() <= 0) {
             return new MyInteger(stripped.toBigIntegerExact());
         }
+
         return new MyReal(real);
     }
 
