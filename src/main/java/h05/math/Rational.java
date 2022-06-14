@@ -46,8 +46,22 @@ public final class Rational {
         if (denominator.signum() == 0) {
             throw new ArithmeticException("Division by zero");
         }
+        boolean bol = true;
+        BigInteger bigInteger = denominator;
+        while(bol){
+            if((numerator % bigInteger) == 0){
 
-        throw new RuntimeException("H1.1 not implemented"); // TODO: remove if H1.1 implemented
+            }
+
+        }
+
+
+
+        this.numerator = numerator;
+        this.denominator = denominator;
+
+
+
     }
 
     /**
