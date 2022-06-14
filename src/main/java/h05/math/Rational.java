@@ -46,22 +46,25 @@ public final class Rational {
         if (denominator.signum() == 0) {
             throw new ArithmeticException("Division by zero");
         }
-        boolean bol = true;
-        BigInteger bigInteger = denominator;
-        while(bol){
-            if((numerator % bigInteger) == 0){
 
-            }
-
+        BigInteger rest;
+        BigInteger workN = numerator;
+        BigInteger workD = denominator;
+        if(denominator.signum() == -1){
+            numerator = workN = numerator.multiply(new BigInteger("-1"));
+            denominator = workD = denominator.multiply(new BigInteger("-1"));
         }
+        
 
-
-
-        this.numerator = numerator;
-        this.denominator = denominator;
-
-
-
+        while(true){
+            rest = workN.mod(workD);
+            if(rest.intValue() == 0)
+                break;
+            workN = workD;
+            workD = rest;
+        }
+        this.numerator = numerator.divide(workD);
+        this.denominator = denominator.divide(workD);
     }
 
     /**
