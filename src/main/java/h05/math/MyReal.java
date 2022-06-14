@@ -101,12 +101,12 @@ public final class MyReal extends MyNumber {
 
     @Override
     public MyNumber minus() {
-        throw new RuntimeException("H2.1 - not implemented"); // TODO: H2.1 - remove if implemented
+        return new MyReal(value.negate());
     }
 
     @Override
     public MyNumber minus(MyNumber other) {
-        throw new RuntimeException("H2.1 - not implemented"); // TODO: H2.1 - remove if implemented
+        return checkRealToInt(value.add(other.toReal().negate()));
     }
 
     @Override
@@ -116,12 +116,12 @@ public final class MyReal extends MyNumber {
 
     @Override
     public MyNumber divide() {
-        throw new RuntimeException("H2.1 - not implemented"); // TODO: H2.1 - remove if implemented
+        return checkRealToInt(BigDecimal.ONE.divide(value)); // ROUNDINGMODE
     }
 
     @Override
     public MyNumber divide(MyNumber other) {
-        throw new RuntimeException("H2.1 - not implemented"); // TODO: H2.1 - remove if implemented
+        return checkRealToInt(value.divide(other.toReal())); // ROUNDINGMODE
     }
 
     @Override
