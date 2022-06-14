@@ -45,12 +45,16 @@ public final class MyRational extends MyNumber {
 
     @Override
     public Rational toRational() {
-        throw new RuntimeException("H1.2 not implemented"); // TODO: remove if H1.2 implemented
+        return value;
     }
 
     @Override
     public BigDecimal toReal() {
-        throw new RuntimeException("H1.2 not implemented"); // TODO: remove if H1.2 implemented
+        BigDecimal num = new BigDecimal(value.getNumerator());
+
+        BigDecimal dem = new BigDecimal(value.getDenominator());
+
+        return num.divide(dem);
     }
 
     @Override

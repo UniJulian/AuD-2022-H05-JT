@@ -59,12 +59,13 @@ public final class MyReal extends MyNumber {
 
     @Override
     public Rational toRational() {
-        throw new RuntimeException("H1.2 not implemented"); // TODO: remove if H1.2 implemented
+        return new Rational(value.multiply(new BigDecimal(Math.pow(10,MyReal.SCALE) + "")).toBigInteger(),
+                                            new BigInteger(Math.pow(10,MyReal.SCALE) + ""));
     }
 
     @Override
     public BigDecimal toReal() {
-        throw new RuntimeException("H1.2 not implemented"); // TODO: remove if H1.2 implemented
+        return value;
     }
 
     @Override

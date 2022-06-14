@@ -45,12 +45,12 @@ public final class MyInteger extends MyNumber {
 
     @Override
     public Rational toRational() {
-        throw new RuntimeException("H1.2 not implemented"); // TODO: remove if H1.2 implemented
+        return new Rational(value,BigInteger.ONE);
     }
 
     @Override
     public BigDecimal toReal() {
-        throw new RuntimeException("H1.2 not implemented"); // TODO: remove if H1.2 implemented
+        return new BigDecimal(value);
     }
 
     @Override

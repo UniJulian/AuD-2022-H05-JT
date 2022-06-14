@@ -54,7 +54,7 @@ public final class Rational {
             numerator = workN = numerator.multiply(new BigInteger("-1"));
             denominator = workD = denominator.multiply(new BigInteger("-1"));
         }
-        
+
 
         while(true){
             rest = workN.mod(workD);
