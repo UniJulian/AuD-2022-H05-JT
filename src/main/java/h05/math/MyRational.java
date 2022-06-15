@@ -54,7 +54,7 @@ public final class MyRational extends MyNumber {
 
         BigDecimal dem = new BigDecimal(value.getDenominator());
 
-        return num.divide(dem);
+        return num.divide(dem,MyReal.SCALE,MyReal.ROUNDING_MODE);
     }
 
     @Override
@@ -126,7 +126,7 @@ public final class MyRational extends MyNumber {
     @Override
     public MyNumber divide(MyNumber other) {
         if (other instanceof MyReal) {
-            return checkRealToInt(toReal().multiply( BigDecimal.ONE.divide(other.toReal()))); // ROUNDINGMODE
+            return checkRealToInt(toReal().multiply( BigDecimal.ONE.divide(other.toReal(),MyReal.SCALE,MyReal.ROUNDING_MODE)));
         }
         Rational r = other.toRational();
         Rational temp = new Rational(r.getDenominator(),r.getNumerator());

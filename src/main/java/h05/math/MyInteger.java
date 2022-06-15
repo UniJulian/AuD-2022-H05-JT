@@ -128,7 +128,7 @@ public final class MyInteger extends MyNumber {
             return new MyInteger(value.divide(other.toInteger()));
         }
         if (other instanceof MyReal) {
-            return checkRealToInt(toReal().divide(other.toReal()));     // ROUNDING MODE
+            return checkRealToInt(toReal().divide(other.toReal(),MyReal.SCALE,MyReal.ROUNDING_MODE));
         }
         return checkRationalToInt(other.toRational().times(BigInteger.ONE.divide(value)));
     }

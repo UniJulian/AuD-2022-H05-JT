@@ -116,12 +116,12 @@ public final class MyReal extends MyNumber {
 
     @Override
     public MyNumber divide() {
-        return checkRealToInt(BigDecimal.ONE.divide(value)); // ROUNDINGMODE
+        return new MyReal(BigDecimal.ONE.divide(value,MyReal.SCALE,MyReal.ROUNDING_MODE));
     }
 
     @Override
     public MyNumber divide(MyNumber other) {
-        return checkRealToInt(value.divide(other.toReal())); // ROUNDINGMODE
+        return checkRealToInt(value.divide(other.toReal(),MyReal.SCALE,MyReal.ROUNDING_MODE));
     }
 
     @Override
