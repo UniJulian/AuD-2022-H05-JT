@@ -145,12 +145,18 @@ public final class MyRational extends MyNumber {
 
     @Override
     public MyNumber exp() {
-        throw new RuntimeException("H2.2- not implemented"); // TODO: H2.2 - remove if implemented
+        double e = Math.E;
+        BigDecimal d = new BigDecimal(e);
+        MyReal RE = new MyReal(d);
+        return expt(RE);
     }
 
     @Override
     public MyNumber ln() {
-        throw new RuntimeException("H2.2- not implemented"); // TODO: H2.2 - remove if implemented
+        double e = Math.E;
+        BigDecimal d = new BigDecimal(e);
+        MyReal RE = new MyReal(d);
+        return log(RE);
     }
 
     @Override

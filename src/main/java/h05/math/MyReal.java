@@ -59,8 +59,9 @@ public final class MyReal extends MyNumber {
 
     @Override
     public Rational toRational() {
-        return new Rational(value.multiply(new BigDecimal(Math.pow(10,MyReal.SCALE) + "")).toBigInteger(),
-                                            new BigInteger(Math.pow(10,MyReal.SCALE) + ""));
+        BigInteger a = new BigInteger(Math.pow(10,MyReal.SCALE) + "");
+        BigInteger b = (new BigDecimal(Math.pow(10,MyReal.SCALE) + "")).toBigInteger();;
+        return new Rational(value.toBigInteger().multiply(a),b);
     }
 
     @Override
@@ -136,12 +137,18 @@ public final class MyReal extends MyNumber {
 
     @Override
     public MyNumber exp() {
-        throw new RuntimeException("H2.2 - not implemented"); // TODO: H2.2 - remove if implemented
+        double e = Math.E;
+        BigDecimal d = new BigDecimal(e);
+        MyReal RE = new MyReal(d);
+        return expt(RE);
     }
 
     @Override
     public MyNumber ln() {
-        throw new RuntimeException("H2.2 - not implemented"); // TODO: H2.2 - remove if implemented
+        double e = Math.E;
+        BigDecimal d = new BigDecimal(e);
+        MyReal RE = new MyReal(d);
+        return log(RE);
     }
 
     @Override
