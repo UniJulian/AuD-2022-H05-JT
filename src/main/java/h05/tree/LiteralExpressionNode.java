@@ -50,7 +50,7 @@ public class LiteralExpressionNode extends OperandExpressionNode {
 
     @Override
     public MyNumber evaluate(Map<String, MyNumber> identifiers) {
-        return identifiers.get(value);                           // was tust du ????
+        return value;
     }
 
     @Override

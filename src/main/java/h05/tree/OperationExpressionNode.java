@@ -1,6 +1,8 @@
 package h05.tree;
 
+import h05.exception.WrongNumberOfOperandsException;
 import h05.math.MyNumber;
+import h05.math.MyReal;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -52,7 +54,29 @@ public class OperationExpressionNode implements ArithmeticExpressionNode {
      */
     public OperationExpressionNode(Operator operator, @Nullable ListItem<ArithmeticExpressionNode> operands) {
         Objects.requireNonNull(operator, "operator null");
-        throw new RuntimeException("H3.3 - not implemented"); // TODO: H3.3 - remove if implemented
+        int belowBorder = 0;
+        int upperBorder = 0;
+        if(operator.equals(Operator.SUB) ||operator.equals(Operator.ADD) ||operator.equals(Operator.MUL) ||operator.equals(Operator.DIV) )
+            upperBorder = Integer.MAX_VALUE;
+        if(operator.equals(Operator.SUB) ||operator.equals(Operator.DIV))
+            belowBorder = 1;
+        if(operator.equals(Operator.EXP) || operator.equals(Operator.LN) || operator.equals(Operator.SQRT))
+            belowBorder = upperBorder = 1;
+        if(operator.equals(Operator.EXPT) || operator.equals(Operator.LOG))
+            belowBorder = upperBorder = 2;
+
+        int len = 0;
+        ListItem<ArithmeticExpressionNode> workOperands = operands;
+        while(workOperands!= null){
+            len++;
+            workOperands = workOperands.next;
+        }
+       if(len < belowBorder || len > upperBorder)
+            throw new WrongNumberOfOperandsException(len,belowBorder,upperBorder);
+
+
+        this.operator = operator;
+        this.operands = operands;
     }
 
     /**
@@ -75,7 +99,42 @@ public class OperationExpressionNode implements ArithmeticExpressionNode {
 
     @Override
     public MyNumber evaluate(Map<String, MyNumber> identifiers) {
-        throw new RuntimeException("H3.3 - not implemented"); // TODO: H3.3 - remove if implemented
+        ListItem<ArithmeticExpressionNode> workOperands = operands;
+        assert workOperands != null;
+        MyNumber num = workOperands.key.evaluate(identifiers);
+        workOperands = workOperands.next;
+        String opera = operator.getSymbol();
+
+
+
+        if(workOperands == null){
+            if(opera.equals("-"))
+                num = num.minus();
+            if(opera.equals("/"))
+                num = num.divide();
+            if(opera.equals("exp"))
+                num = num.exp();
+            if(opera.equals("ln"))
+                num = num.ln();
+            if(opera.equals("sqrt"))
+                num = num.sqrt();
+        }
+        while(workOperands!= null){
+            if(opera.equals("+"))
+                num = num.plus(workOperands.key.evaluate(identifiers));
+            if(opera.equals("-"))
+                num = num.minus(workOperands.key.evaluate(identifiers));
+            if(opera.equals("*"))
+                num = num.times(workOperands.key.evaluate(identifiers));
+            if(opera.equals("/"))
+                num = num.divide(workOperands.key.evaluate(identifiers));
+            if(opera.equals("expt"))
+                num = num.expt(workOperands.key.evaluate(identifiers));
+            if(opera.equals("log"))
+                num = num.log(workOperands.key.evaluate(identifiers));
+            workOperands = workOperands.next;
+        }
+        return num;
     }
 
     @Override
@@ -90,7 +149,17 @@ public class OperationExpressionNode implements ArithmeticExpressionNode {
 
     @Override
     public ArithmeticExpressionNode clone() {
-        throw new RuntimeException("H3.3 - not implemented"); // TODO: H3.3 - remove if implemented
+        ListItem<ArithmeticExpressionNode>workOperands = operands;
+        ListItem<ArithmeticExpressionNode> newOperands = new ListItem<>();
+        ListItem<ArithmeticExpressionNode> newOperandsResult = newOperands;
+
+        while(workOperands != null){
+            newOperands.key = workOperands.key;
+            newOperands.next = new ListItem<>();
+            newOperands = newOperands.next;
+            workOperands = workOperands.next;
+        }
+        return new OperationExpressionNode(operator,newOperandsResult);
     }
 
     @Override
