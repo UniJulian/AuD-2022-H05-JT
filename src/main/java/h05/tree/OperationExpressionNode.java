@@ -105,33 +105,25 @@ public class OperationExpressionNode implements ArithmeticExpressionNode {
         workOperands = workOperands.next;
         String opera = operator.getSymbol();
 
-
-
         if(workOperands == null){
-            if(opera.equals("-"))
-                num = num.minus();
-            if(opera.equals("/"))
-                num = num.divide();
-            if(opera.equals("exp"))
-                num = num.exp();
-            if(opera.equals("ln"))
-                num = num.ln();
-            if(opera.equals("sqrt"))
-                num = num.sqrt();
+            switch (opera){
+                case "-": num = num.minus();break;
+                case "/": num = num.divide();break;
+                case "exp": num = num.exp();break;
+                case "ln":  num = num.ln();break;
+                case "sqrt": num = num.sqrt();break;
+            }
         }
         while(workOperands!= null){
-            if(opera.equals("+"))
-                num = num.plus(workOperands.key.evaluate(identifiers));
-            if(opera.equals("-"))
-                num = num.minus(workOperands.key.evaluate(identifiers));
-            if(opera.equals("*"))
-                num = num.times(workOperands.key.evaluate(identifiers));
-            if(opera.equals("/"))
-                num = num.divide(workOperands.key.evaluate(identifiers));
-            if(opera.equals("expt"))
-                num = num.expt(workOperands.key.evaluate(identifiers));
-            if(opera.equals("log"))
-                num = num.log(workOperands.key.evaluate(identifiers));
+            MyNumber n = workOperands.key.evaluate(identifiers);
+            switch (opera){
+                case "-": num = num.minus(n);break;
+                case "+":  num = num.plus(n);break;
+                case "*": num = num.times(n);break;
+                case "/": num = num.divide(n);break;
+                case "expt": num = num.expt(n);break;
+                case "log": num = num.log(n);break;
+            }
             workOperands = workOperands.next;
         }
         return num;
