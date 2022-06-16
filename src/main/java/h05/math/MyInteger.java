@@ -4,6 +4,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Comparator;
 import java.util.Objects;
 
 /**
@@ -50,7 +51,11 @@ public final class MyInteger extends MyNumber {
 
     @Override
     public BigDecimal toReal() {
-        return new BigDecimal(value);
+        BigDecimal newValue = new BigDecimal(value);
+        BigDecimal a = BigDecimal.valueOf((long)Math.pow(10,MyReal.SCALE));
+        BigDecimal aStrich = BigDecimal.valueOf((long)Math.pow(10,MyReal.SCALE));
+        BigDecimal b = newValue.multiply(aStrich);
+        return b.divide(a,MyReal.SCALE,MyReal.ROUNDING_MODE);
     }
 
     @Override
@@ -135,33 +140,98 @@ public final class MyInteger extends MyNumber {
 
     @Override
     public MyNumber sqrt() {
-        throw new RuntimeException("H2.2 - not implemented"); // TODO: H2.2 - remove if implemented
+
+        Comparator<BigDecimal> bd = Comparator.naturalOrder();
+        int counter2 = 0;
+        BigDecimal val = new BigDecimal(this.value);
+        while( (bd.compare(val, BigDecimal.TEN) > 0 ) || (bd.compare(val, BigDecimal.ZERO) < 0 )){
+            if(bd.compare(val, BigDecimal.TEN) > 0 ){
+                val = val.divide(BigDecimal.TEN,MyReal.SCALE,MyReal.ROUNDING_MODE);
+                counter2++;
+            }
+            if(bd.compare(val, BigDecimal.ZERO) < 0 ){
+                val = val.multiply(BigDecimal.TEN);
+                counter2--;
+            }
+        }
+        double res = Math.round(Math.pow(val.doubleValue(),0.5) *Math.pow(10,counter2*0.5));
+        return new MyInteger(BigInteger.valueOf((long)res));
     }
 
     @Override
     public MyNumber expt(MyNumber n) {
-        throw new RuntimeException("H2.2 - not implemented"); // TODO: H2.2 - remove if implemented
+
+        BigDecimal newN = n.toReal();
+        Comparator<BigDecimal> bd = Comparator.naturalOrder();
+        int counter2 = 0;
+        BigDecimal val = new BigDecimal(this.value);
+        while( (bd.compare(val, BigDecimal.TEN) > 0 ) || (bd.compare(val, BigDecimal.ZERO) < 0 )){
+            if(bd.compare(val, BigDecimal.TEN) > 0 ){
+                val = val.divide(BigDecimal.TEN,MyReal.SCALE,MyReal.ROUNDING_MODE);
+                counter2++;
+            }
+            if(bd.compare(val, BigDecimal.ZERO) < 0 ){
+                val = val.multiply(BigDecimal.TEN);
+                counter2--;
+            }
+        }
+        double res = Math.round(Math.pow(val.doubleValue(),newN.doubleValue()) *Math.pow(10,counter2*newN.doubleValue()));
+        return new MyInteger(BigInteger.valueOf((long)res));
     }
 
     @Override
     public MyNumber exp() {
-        double e = Math.E;
-        BigDecimal d = new BigDecimal(e);
-        MyReal RE = new MyReal(d);
-        return expt(RE);
+        BigDecimal val = new BigDecimal(this.value);
+        double res = Math.pow(Math.E,val.doubleValue());
+        return new MyReal(BigDecimal.valueOf(res));
     }
 
     @Override
     public MyNumber ln() {
-        double e = Math.E;
-        BigDecimal d = new BigDecimal(e);
-        MyReal RE = new MyReal(d);
-        return log(RE);
+        BigDecimal val = new BigDecimal(this.value);
+        double a = Math.log10(val.doubleValue()) ;
+        double b = Math.log10(Math.E);
+        double res = a/b;
+        return new MyReal(BigDecimal.valueOf(res));
     }
 
     @Override
     public MyNumber log(MyNumber base) {
-        throw new RuntimeException("H2.2 - not implemented"); // TODO: H2.2 - remove if implemented
+        BigDecimal newBase = base.toReal();
+
+        Comparator<BigDecimal> bd = Comparator.naturalOrder();
+        int counter = 0;
+
+
+        while( (bd.compare(newBase, BigDecimal.TEN) > 0 ) || (bd.compare(newBase, BigDecimal.ZERO) < 0 )){
+            if(bd.compare(newBase, BigDecimal.TEN) > 0 ){
+                newBase = newBase.divide(BigDecimal.TEN,MyReal.SCALE,MyReal.ROUNDING_MODE);
+                counter++;
+            }
+            if(bd.compare(newBase, BigDecimal.ZERO) < 0 ){
+                newBase = newBase.multiply(BigDecimal.TEN);
+                counter--;
+            }
+        }
+        int counter2 = 0;
+        BigDecimal val = new BigDecimal(this.value);
+        while( (bd.compare(val, BigDecimal.TEN) > 0 ) || (bd.compare(val, BigDecimal.ZERO) < 0 )){
+            if(bd.compare(val, BigDecimal.TEN) > 0 ){
+                val = val.divide(BigDecimal.TEN,MyReal.SCALE,MyReal.ROUNDING_MODE);
+                counter2++;
+            }
+            if(bd.compare(val, BigDecimal.ZERO) < 0 ){
+                val = val.multiply(BigDecimal.TEN);
+                counter2--;
+            }
+        }
+        double a = Math.log10(val.doubleValue()) ;
+        a +=  counter2;
+        double b = Math.log10(newBase.doubleValue());
+        b += counter;
+        double res = Math.round(a/b);
+        return new MyInteger(BigInteger.valueOf((long) res));
+
     }
 
     @Override
