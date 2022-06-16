@@ -50,12 +50,12 @@ public class LiteralExpressionNode extends OperandExpressionNode {
 
     @Override
     public MyNumber evaluate(Map<String, MyNumber> identifiers) {
-        throw new RuntimeException("H3.1 - not implemented"); // TODO: H3.1 - remove if implemented
+        return identifiers.get(value);                           // was tust du ????
     }
 
     @Override
     public ArithmeticExpressionNode clone() {
-        throw new RuntimeException("H3.1 - not implemented"); // TODO: H3.1 - remove if implemented
+        return new LiteralExpressionNode(value);
     }
 
     @Override

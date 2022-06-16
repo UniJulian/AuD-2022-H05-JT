@@ -1,6 +1,7 @@
 package h05.tree;
 
 import h05.exception.IllegalIdentifierExceptions;
+import h05.exception.UndefinedIdentifierException;
 import h05.math.MyNumber;
 
 import java.util.Map;
@@ -36,7 +37,14 @@ public class IdentifierExpressionNode extends OperandExpressionNode {
      * @throws NullPointerException        if the identifier name is {@code null}
      */
     public IdentifierExpressionNode(String value) {
-        throw new RuntimeException("H3.2 - not implemented"); // TODO: H3.2 - remove if implemented
+        if(value == null)
+            throw new NullPointerException();
+        if(value.length() == 0)
+            throw new IllegalArgumentException("empty string");
+
+        if( !(value.matches("[a-zA-Z-]+")))
+            throw new IllegalIdentifierExceptions(value);
+        this.value = value;
     }
 
     /**
@@ -50,12 +58,22 @@ public class IdentifierExpressionNode extends OperandExpressionNode {
 
     @Override
     public MyNumber evaluate(Map<String, MyNumber> identifiers) {
-        throw new RuntimeException("H3.2 - not implemented"); // TODO: H3.2 - remove if implemented
+
+
+        boolean isInEnumDefined = false;  // idk how to implement till now tbh
+
+
+        if(isInEnumDefined)
+            throw new IllegalIdentifierExceptions(value);
+        if(!(identifiers.containsKey(value) ))
+            throw new UndefinedIdentifierException(value);
+
+        return identifiers.get(value);
     }
 
     @Override
     public ArithmeticExpressionNode clone() {
-        throw new RuntimeException("H3.2 - not implemented"); // TODO: H3.2 - remove if implemented
+        return new IdentifierExpressionNode(value);
     }
 
     @Override
