@@ -3,9 +3,11 @@ package h05.tree;
 import h05.exception.BadOperationException;
 import h05.exception.ParenthesesMismatchException;
 import h05.exception.UndefinedOperatorException;
+import h05.math.MyNumber;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class is used to parse an expression and build a tree out of it.
@@ -30,7 +32,12 @@ public final class ExpressionTreeHandler {
      * @throws UndefinedOperatorException   if the operator is not defined
      */
     public static ArithmeticExpressionNode buildRecursively(Iterator<String> expression) {
-        throw new RuntimeException("H4.1 - not implemented"); // TODO: H4.1 - remove if implemented
+        if(!expression.hasNext())
+            throw new BadOperationException("No expression");
+        //ArithmeticExpressionNode root = expression.next();
+        //Map<String, MyNumber> identifiers = Map.
+        //ArithmeticExpressionEvaluator root = new ArithmeticExpressionEvaluator();
+        return new IdentifierExpressionNode("HELP");
     }
 
     /**

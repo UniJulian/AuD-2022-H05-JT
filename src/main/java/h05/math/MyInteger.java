@@ -155,7 +155,7 @@ public final class MyInteger extends MyNumber {
             }
         }
         double res = Math.round(Math.pow(val.doubleValue(),0.5) *Math.pow(10,counter2*0.5));
-        return new MyInteger(BigInteger.valueOf((long)res));
+        return checkRealToInt(new BigDecimal(res));
     }
 
     @Override
@@ -176,14 +176,14 @@ public final class MyInteger extends MyNumber {
             }
         }
         double res = Math.round(Math.pow(val.doubleValue(),newN.doubleValue()) *Math.pow(10,counter2*newN.doubleValue()));
-        return new MyInteger(BigInteger.valueOf((long)res));
+        return checkRealToInt(new BigDecimal(res));
     }
 
     @Override
     public MyNumber exp() {
         BigDecimal val = new BigDecimal(this.value);
         double res = Math.pow(Math.E,val.doubleValue());
-        return new MyReal(BigDecimal.valueOf(res));
+        return checkRealToInt(new BigDecimal(res));
     }
 
     @Override
@@ -192,7 +192,7 @@ public final class MyInteger extends MyNumber {
         double a = Math.log10(val.doubleValue()) ;
         double b = Math.log10(Math.E);
         double res = a/b;
-        return new MyReal(BigDecimal.valueOf(res));
+        return checkRealToInt(new BigDecimal(res));
     }
 
     @Override
@@ -230,7 +230,7 @@ public final class MyInteger extends MyNumber {
         double b = Math.log10(newBase.doubleValue());
         b += counter;
         double res = Math.round(a/b);
-        return new MyInteger(BigInteger.valueOf((long) res));
+        return checkRealToInt(new BigDecimal(res));
 
     }
 
