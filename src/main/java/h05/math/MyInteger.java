@@ -1,5 +1,7 @@
 package h05.math;
 
+import h05.exception.Comparison;
+import h05.exception.WrongOperandException;
 import org.jetbrains.annotations.Nullable;
 
 import java.math.BigDecimal;
@@ -129,6 +131,8 @@ public final class MyInteger extends MyNumber {
 
     @Override
     public MyNumber divide(MyNumber other) {
+        if(other.isZero())
+            throw new WrongOperandException(other, Comparison.DIFFERENT_FROM,new MyInteger(BigInteger.ZERO));
         if (other instanceof MyInteger) {
             return new MyInteger(value.divide(other.toInteger()));
         }
@@ -198,10 +202,8 @@ public final class MyInteger extends MyNumber {
     @Override
     public MyNumber log(MyNumber base) {
         BigDecimal newBase = base.toReal();
-
         Comparator<BigDecimal> bd = Comparator.naturalOrder();
         int counter = 0;
-
 
         while( (bd.compare(newBase, BigDecimal.TEN) > 0 ) || (bd.compare(newBase, BigDecimal.ZERO) < 0 )){
             if(bd.compare(newBase, BigDecimal.TEN) > 0 ){
@@ -229,7 +231,7 @@ public final class MyInteger extends MyNumber {
         a +=  counter2;
         double b = Math.log10(newBase.doubleValue());
         b += counter;
-        double res = Math.round(a/b);
+        double res = a/b;
         return checkRealToInt(new BigDecimal(res));
 
     }

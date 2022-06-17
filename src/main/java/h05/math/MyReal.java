@@ -1,5 +1,7 @@
 package h05.math;
 
+import h05.exception.Comparison;
+import h05.exception.WrongOperandException;
 import org.jetbrains.annotations.Nullable;
 
 import java.math.BigDecimal;
@@ -125,6 +127,8 @@ public final class MyReal extends MyNumber {
 
     @Override
     public MyNumber divide(MyNumber other) {
+        if(other.isZero())
+            throw new WrongOperandException(other, Comparison.DIFFERENT_FROM,new MyInteger(BigInteger.ZERO));
         return checkRealToInt(value.divide(other.toReal(),MyReal.SCALE,MyReal.ROUNDING_MODE));
     }
 
@@ -217,7 +221,7 @@ public final class MyReal extends MyNumber {
         a +=  counter2;
         double b = Math.log10(newBase.doubleValue());
         b += counter;
-        double res =Math.round(a/b);
+        double res =a/b;
         return checkRealToInt(new BigDecimal(res));
 
     }

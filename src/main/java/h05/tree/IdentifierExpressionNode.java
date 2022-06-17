@@ -58,10 +58,10 @@ public class IdentifierExpressionNode extends OperandExpressionNode {
 
     @Override
     public MyNumber evaluate(Map<String, MyNumber> identifiers) {
-
-
-        boolean isInEnumDefined = false;  // idk how to implement till now tbh
-
+        boolean isInEnumDefined = false;
+        for(Identifier i:Identifier.values())
+            if(i.getValue().equals(identifiers.get(value)))
+                isInEnumDefined = true;
 
         if(isInEnumDefined)
             throw new IllegalIdentifierExceptions(value);

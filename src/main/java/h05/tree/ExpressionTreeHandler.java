@@ -1,10 +1,10 @@
 package h05.tree;
 
-import h05.exception.BadOperationException;
-import h05.exception.ParenthesesMismatchException;
-import h05.exception.UndefinedOperatorException;
-import h05.math.MyNumber;
+import h05.exception.*;
+import h05.math.*;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -34,11 +34,102 @@ public final class ExpressionTreeHandler {
     public static ArithmeticExpressionNode buildRecursively(Iterator<String> expression) {
         if(!expression.hasNext())
             throw new BadOperationException("No expression");
-        //ArithmeticExpressionNode root = expression.next();
-        //Map<String, MyNumber> identifiers = Map.
-        //ArithmeticExpressionEvaluator root = new ArithmeticExpressionEvaluator();
-        return new IdentifierExpressionNode("HELP");
+        String firstExp = expression.next();
+        if(isNumber(firstExp))
+            return new LiteralExpressionNode(StringToNumber(firstExp));
+
+        ArithmeticExpressionNode root = null;
+        ListItem<ArithmeticExpressionNode> rootList = new ListItem<>();
+        ListItem<ArithmeticExpressionNode> rootListBackup = null;
+        if(firstExp.equals("(")){
+            String nextExp = expression.next();
+            if(isNumber(nextExp))
+                throw new BadOperationException("wieso ist da eine Zahl .mp4");
+            if(isOperator(nextExp))
+                rootListBackup = rootList;
+                rootList = recursiveHelperTwo(expression, rootList);
+
+                root =new OperationExpressionNode(StringToOperator(nextExp),rootListBackup);
+        }
+
+
+        return root;
     }
+
+    private static boolean isNumber(String expression){
+
+        if(expression.matches("[-+]?[0-9]+"))     //Integer
+            return true;
+        if(expression.matches("[-+]?[0-9]+\\.[0-9]+"))      //Integer
+            return true;
+        if(expression.matches("[-+]?[0-9]+\\/[-+]?[0-9]+"))  //Integer
+            return true;
+        return false;
+    }
+
+    private static MyNumber StringToNumber(String expression){
+
+        if(expression.matches("[-+]?[0-9]+"))     //Integer
+            return new MyInteger(new BigInteger(expression));
+        if(expression.matches("[-+]?[0-9]+\\.[0-9]+"))      //Real
+            return  new MyReal(new BigDecimal(expression));
+        if(expression.matches("[-+]?[0-9]+\\/[-+]?[0-9]+")){        //Rational
+
+            String[] arr = expression.split("\\/");
+            BigInteger num = new BigInteger(arr[0]);
+            BigInteger denom = new BigInteger(arr[1]);
+
+            return  new MyRational(new Rational(num,denom));
+        }
+        throw new IllegalIdentifierExceptions(expression);
+    }
+    private static boolean isOperator(String operator) {
+        for(Operator i:Operator.values())
+            if(i.getSymbol().equals(operator))
+                return true;
+        throw new UndefinedOperatorException(operator);
+    }
+    private static Operator StringToOperator(String operator) {
+        for(Operator i:Operator.values())
+            if(i.getSymbol().equals(operator))
+                return i;
+        throw new UndefinedOperatorException(operator);
+    }
+    private static ArithmeticExpressionNode recursiveHelperOne(Iterator<String> expression) {
+
+        String s = expression.next();
+        Operator op = StringToOperator(s);
+        ListItem<ArithmeticExpressionNode> rootList = new ListItem<>();
+        ListItem<ArithmeticExpressionNode> rootListBackup = rootList;
+        recursiveHelperTwo(expression, rootList);
+        return new OperationExpressionNode(op,rootListBackup);
+    }
+    private static ListItem<ArithmeticExpressionNode> recursiveHelperTwo(Iterator<String> expression,  ListItem<ArithmeticExpressionNode> rootList) {
+
+
+        String nextExp = expression.next();
+        while(expression.hasNext()) {
+            if (nextExp.equals(")")){
+                return null;
+            }
+            if (nextExp.equals("(")) {
+                rootList.key = recursiveHelperOne(expression);
+                rootList.next = new ListItem<>();
+                rootList = rootList.next;
+            }
+            while (isNumber(nextExp)) {
+                rootList.key = new LiteralExpressionNode(StringToNumber(nextExp));
+                nextExp = expression.next();
+
+                if(isNumber(nextExp)){
+                    rootList.next = new ListItem<>();
+                    rootList = rootList.next;
+                }
+            }
+        }
+        return null;
+    }
+
 
     /**
      * Builds an arithmetic expression tree from a string iteratively.

@@ -322,7 +322,7 @@ public class PublicTests {
     class ExpressionTreeHandlerTest {
 
         private static final List<String> EXPRESSION = List.of(
-            "(", "+", "a", "(", "/", "(", "expt", "2", "b", ")", "(", "*", "(", "ln", "e", ")", "c", ")", ")", ")");
+            "(", "+", "1", "(", "/", "(", "expt", "2", "1", ")", "(", "*", "(", "ln", "1", ")", "1", ")", ")", ")");
 
         @Test
         void testBuildRecursively() {
